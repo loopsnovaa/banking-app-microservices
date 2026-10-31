@@ -9,8 +9,7 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 RUN ./mvnw dependency:go-offline -B
-# source has to come after the dependency step, otherwise every code edit would bust that
-# cached layer above and force a full dependency redownload every single build
+# source has to come after the dependency step, otherwise every code edit would bust that cached layer above and force a full dependency redownload every single build
 COPY src ./src
 # tests skipped here on purpose, ci already runs the full suite separately so this step just
 # focuses on producing the jar as fast as possible
